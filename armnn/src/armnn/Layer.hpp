@@ -220,4 +220,28 @@ private:
     //std::list<std::string> m_RelatedLayerNames;
 };
 
+// A layer user-provided data can be bound to (e.g. inputs, outputs).
+class BindableLayer : public Layer
+{
+public:
+    BindableLayer(unsigned int numInputSlots,
+        unsigned int numOutputSlots,
+        LayerType type,
+        const char* name,
+        LayerBindingId id)
+    : Layer(numInputSlots, numOutputSlots, type, name)
+    , m_Id(id)
+    {
+    }
+
+    LayerBindingId GetBindingId() const { return m_Id; };
+
+protected:
+    ~BindableLayer() = default;
+
+private:
+    LayerBindingId m_Id;
+};
+
+
 }

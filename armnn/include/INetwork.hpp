@@ -107,7 +107,7 @@ public:
     static INetworkPtr Create();
     static void Destroy(INetwork* network);
 
-    virtual Status PrintGraph() = 0;
+    //virtual Status PrintGraph() = 0;
 
     /// Adds an input layer to the network.
     /// @param id - User generated id to uniquely identify a particular input. The same id needs to be specified.
@@ -163,13 +163,7 @@ public:
         const ConstTensor& biases,
         const char* name = nullptr) = 0;
 
-    /// Adds a permute layer to the network.
-    /// @param permuteDescriptor - PermuteDescriptor to configure the permute.
-    /// @param name - Optional name for the layer.
-    /// @return - Interface for configuring the layer.
-    virtual IConnectableLayer* AddPermuteLayer(const PermuteDescriptor& permuteDescriptor,
-                                               const char* name = nullptr) = 0;
-
+    
     /// Adds a pooling layer to the network.
     /// @param pooling2dDescriptor - Pooling2dDescriptor to configure the pooling.
     /// @param name - Optional name for the layer.
@@ -198,99 +192,7 @@ public:
     virtual IConnectableLayer* AddSoftmaxLayer(const SoftmaxDescriptor& softmaxDescriptor,
         const char* name = nullptr) = 0;
 
-    /// Adds a splitter layer to the network.
-    /// @param splitterDescriptor - WindowsDescriptor to configure the splitting process.
-    ///                             Number of Views must be equal to the number of outputs,
-    ///                             and their order must match - e.g. first view corresponds to
-    ///                             the first output, second view to the second output, etc....
-    /// @param name - Optional name for the layer.
-    /// @return - Interface for configuring the layer.
-    virtual IConnectableLayer* AddSplitterLayer(const ViewsDescriptor& splitterDescriptor
-        , const char* name = nullptr) = 0;
-
-    /// Adds a merger layer to the network.
-    /// @param mergerDescriptor - WindowsDescriptor to configure the merging process. Number of Views must be equal to
-    ///                           the number of inputs, and their order must match - e.g. first view corresponds to
-    ///                           the first input, second view to the second input, etc....
-    /// @param name - Optional name for the layer.
-    /// @return - Interface for configuring the layer.
-    virtual IConnectableLayer* AddMergerLayer(const OriginsDescriptor& mergerDescriptor,
-        const char* name = nullptr) = 0;
-
-    /// Adds an addition layer to the network.
-    /// @param name - Optional name for the layer.
-    /// @return - Interface for configuring the layer.
-    virtual IConnectableLayer* AddAdditionLayer(const char* name = nullptr) = 0;
-
-    /// Adds a multiplication layer to the network.
-    /// @param name - Optional name for the layer.
-    /// @return - Interface for configuring the layer.
-    virtual IConnectableLayer* AddMultiplicationLayer(const char* name = nullptr) = 0;
-
-    /// Adds a batch normalization layer to the network.
-    /// @param mean - Pre-calculated mean for each channel.
-    /// @param variance - Pre-calculated variance for each channel.
-    /// @param beta - Per-channel additive factor.
-    /// @param gamma - Per-channel multiplicative factor.
-    /// @return - Interface for configuring the layer.
-    /// @param name - Optional name for the layer.
-    virtual IConnectableLayer* AddBatchNormalizationLayer(const BatchNormalizationDescriptor& desc,
-        const ConstTensor& mean,
-        const ConstTensor& variance,
-        const ConstTensor& beta,
-        const ConstTensor& gamma,
-        const char* name = nullptr) = 0;
-
-    /// Adds a resize bilinear layer to the network.
-    /// @param resizeDesc - Parameters for the resize operation.
-    /// @param name - Optional name for the layer.
-    /// @return - Interface for configuring the layer.
-    virtual IConnectableLayer* AddResizeBilinearLayer(const ResizeBilinearDescriptor& resizeDesc,
-                                                      const char* name = nullptr) = 0;
-
-    /// Adds an L2 normalization layer to the network.
-    /// Normalization is performed along dimension 1, but requires a 4d input.
-    /// @param name - Optional name for the layer.
-    /// @return - Interface for configuring the layer.
-    virtual IConnectableLayer* AddL2NormalizationLayer(const char* name = nullptr) = 0;
-
-    /// Adds a layer with no inputs and a single output, which always corresponds to
-    /// the passed in constant tensor.
-    /// @param input - Tensor to be provided as the only output of the layer. The layer will maintain
-    ///                its own copy of the tensor data, meaning the memory referenced by @a input can
-    ///                be freed or reused after this function is called.
-    /// @param name - Optional name for the layer.
-    /// @return - Interface for configuring the layer.
-    virtual IConnectableLayer* AddConstantLayer(const ConstTensor& input,
-        const char* name = nullptr) = 0;
-
-    /// Adds a reshape layer to the network.
-    /// @param reshapeDescriptor - Parameters for the reshape operation.
-    /// @param name - Optional name for the layer.
-    /// @return - Interface for configuring the layer.
-    virtual IConnectableLayer* AddReshapeLayer(const ReshapeDescriptor& reshapeDescriptor,
-                                               const char* name = nullptr) = 0;
-
-    /// Adds a floor layer to the network.
-    /// @param name - Optional name for the layer.
-    /// @return - Interface for configuring the layer.
-    virtual IConnectableLayer* AddFloorLayer(const char* name = nullptr) = 0;
-
-    /// Adds an output layer to the network.
-    /// @param id - User generated id to uniquely identify a particular output. The same id needs to be specified
-    /// when passing the outputs to the IRuntime::EnqueueWorkload() function.
-    /// @param name - Optional name for the layer.
-    /// @return - Interface for configuring the layer.
-    virtual IConnectableLayer* AddOutputLayer(LayerBindingId id, const char* name = nullptr) = 0;
-
-    /// Add a Lstm layer to the network
-    /// @param descriptor Parameters for the Lstm operation
-    /// @param name Optional name for the layer
-    /// @return Interface for configuring the layer.
-    virtual IConnectableLayer* AddLstmLayer(const LstmDescriptor& descriptor,
-                                            const LstmInputParams& params,
-                                            const char* name = nullptr) = 0;
-
+    
 protected:
     ~INetwork() {}
 };
