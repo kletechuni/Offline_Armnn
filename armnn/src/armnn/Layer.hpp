@@ -3,6 +3,7 @@
 #include <armnn/Tensor.hpp>
 #include <armnn/INetwork.hpp>
 
+
 #include <algorithm>
 #include <memory>
 #include <string>
@@ -62,6 +63,7 @@ class OutputSlot final : public IOutputSlot
 public:
     explicit OutputSlot(Layer& owner)
     : m_OwningLayer(owner)
+     ,m_TensorInfo()
     {}
 
     ~OutputSlot()
@@ -104,6 +106,9 @@ public:
     const InputSlot* GetConnection(unsigned int index) const override;
     InputSlot* GetConnection(unsigned int index) override;
 
+
+  /// @brief - Sets the TensorInfo used by this output handler.
+    /// @param tensorInfo - TensorInfo for the output.
     void SetTensorInfo(const TensorInfo& tensorInfo) override;
     const TensorInfo& GetTensorInfo() const override;
     bool IsTensorInfoSet() const override;
@@ -118,11 +123,13 @@ public:
         return Disconnect(*boost::polymorphic_downcast<InputSlot*>(&slot));
     }
 
+    
+
 private:
     void ValidateConnectionIndex(unsigned int index) const;
-
     Layer& m_OwningLayer;
     TensorInfo m_TensorInfo;
+    bool m_bTensorInfoSet = false;
     std::vector<InputSlot*> m_Connections;
 };
 
@@ -169,37 +176,11 @@ public:
         return (GetNumOutputSlots() > 0) && (numConnections == 0);
     }
 
-    // Used for sorting.
-    void ResetPriority() const;
-    LayerPriority GetPriority() const;
 
     LayerType GetType() const { return m_Type; }
 
     DataType GetDataType() const;
 
-   
-
-
-
-    virtual void ValidateTensorShapesFromInputs() = 0;
-
-    std::vector<TensorShape> InferOutputShapes(const std::vector<TensorShape>& inputShapes) const override;
-
-
-    // Free up the constant source data
-    virtual void ReleaseConstantData();
-
-    template<typename Op>
-    void OperateOnConstantTensors(Op op)
-    {
-        for (auto constant : GetConstantTensorsByRef())
-        {
-            if (constant.get())
-            {
-                op(constant);
-            }
-        }
-    };
 
     // IConnectableLayer
 
@@ -231,8 +212,8 @@ private:
 
 
     /// Used for sorting.
-    mutable LayerPriority m_Priority = 0;
-    mutable bool m_Visiting = false;
+   
+   
 
     LayerGuid m_Guid;
 
