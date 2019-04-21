@@ -13,8 +13,6 @@
 
 #include <string>
 #include <vector>
-#include <memory>
-
 #include "Layer.hpp"
 
 namespace armnn
