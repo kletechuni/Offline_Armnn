@@ -5,11 +5,11 @@
 #pragma once
 
 #include "LayerWithParameters.hpp"
-
+#include<Layer.hpp>
 namespace armnn
 {
 
-class ScopedCpuTensorHandle;
+
 
 /// This layer represents a fully connected operation.
 class FullyConnectedLayer : public LayerWithParameters<FullyConnectedDescriptor>
@@ -21,7 +21,7 @@ public:
     ConstTensor m_Bias;
 
 
-protected:
+
     /// Constructor to create a FullyConnectedLayer.
     /// @param [in] param FullyConnectedDescriptor to configure the fully connected operation.
     /// @param [in] name Optional name for the layer.
@@ -32,7 +32,7 @@ protected:
 
     /// Retrieve the handles to the constant values stored by the layer.
     /// @return A vector of the constant tensors stored by this layer.
-    ConstantTensors GetConstantTensorsByRef() override;
+    //  ConstantTensors GetConstantTensorsByRef() override;
 };
 
 } // namespace

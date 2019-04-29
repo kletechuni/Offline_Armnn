@@ -49,6 +49,7 @@ public:
     virtual unsigned int CalculateIndexOnOwner() const = 0;
 
     virtual LayerGuid GetOwningLayerGuid() const = 0;
+    
 
 protected:
     /// Not user deletable.
@@ -71,7 +72,7 @@ public:
     virtual const IOutputSlot& GetOutputSlot(unsigned int index) const = 0;
     virtual IOutputSlot& GetOutputSlot(unsigned int index) = 0;
 
-    virtual std::vector<TensorShape> InferOutputShapes(const std::vector<TensorShape>& inputShapes) const = 0;
+    //virtual std::vector<TensorShape> InferOutputShapes(const std::vector<TensorShape>& inputShapes) const = 0;
 
     virtual LayerGuid GetGuid() const = 0;
 
@@ -115,7 +116,7 @@ public:
     /// @param name - Optional name for the layer.
     /// @return - Interface for configuring the layer.
     virtual IConnectableLayer* AddInputLayer(LayerBindingId id, const char* name = nullptr) = 0;
-
+    virtual IConnectableLayer* AddOutputLayer(LayerBindingId id, const char* name=nullptr)=0;
     /// Adds a 2D convolution layer to the network.
     /// @param convolution2dDescriptor - Description of the 2D convolution layer.
     /// @param weights - Tensor for the weights data.

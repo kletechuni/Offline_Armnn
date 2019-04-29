@@ -5,7 +5,7 @@
 #pragma once
 
 #include <armnn/DescriptorsFwd.hpp>
-
+#include "LayersFwd.hpp"
 #include <armnn/TensorFwd.hpp>
 #include <armnn/Types.hpp>
 
@@ -19,7 +19,6 @@
 
 namespace armnn
 {
-class Graph;
 
 /// Private implementation of INetwork.
 class Network final : public INetwork
@@ -31,7 +30,7 @@ public:
     // const Graph& GetGraph() const { return *m_Graph; }
 
     // Status PrintGraph() override;
-
+    IConnectableLayer* AddOutputLayer(LayerBindingId id, const char* name=nullptr) override;
     IConnectableLayer* AddInputLayer(LayerBindingId id, const char* name=nullptr) override;
 
 
@@ -96,9 +95,9 @@ private:
         const ConstTensor& weights,
         const ConstTensor* biases,
         const char* name);
-
+   
     //std::unique_ptr<Graph> m_Graph;
-    std::vector<Layer> m_Graph;
+    std::vector<Layer*> m_Graph;
 };
 
 

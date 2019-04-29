@@ -1,8 +1,12 @@
-
+#pragma once
 #include <armnn/Types.hpp>
 #include <armnn/Tensor.hpp>
 #include <armnn/INetwork.hpp>
-
+#include <armnn/Descriptors.hpp>
+#include "InternalTypes.hpp"
+#include <boost/numeric/conversion/cast.hpp>
+#include <boost/core/ignore_unused.hpp>
+#include <boost/cast.hpp>
 
 #include <algorithm>
 #include <memory>
@@ -14,8 +18,9 @@
 
 namespace armnn
 {
-
-    class InputSlot final : public IInputSlot
+     class Layer;
+    class OutputSlot;
+ class InputSlot final : public IInputSlot
 {
 public:
     explicit InputSlot(Layer& owner, unsigned int slotIndex)
@@ -37,14 +42,14 @@ public:
     {
         if (m_Connection != nullptr && source != nullptr)
         {
-            throw InvalidArgumentException("Tried to connect an output slot to an input slot, "
-                "but the latter already has a connection");
+            // throw InvalidArgumentException("Tried to connect an output slot to an input slot, "
+            //     "but the latter already has a connection");
         }
         m_Connection = source;
     }
 
     // Inserts single-output existing layer at this point in the graph.
-    void Insert(Layer& layer);
+   // void Insert(Layer& layer);
 
     // IInputSlot
 
@@ -61,9 +66,9 @@ private:
 class OutputSlot final : public IOutputSlot
 {
 public:
-    explicit OutputSlot(Layer& owner)
+    explicit OutputSlot(Layer& owner,TensorInfo tensorinfo)
     : m_OwningLayer(owner)
-     ,m_TensorInfo()
+     ,m_TensorInfo(tensorinfo)
     {}
 
     ~OutputSlot()
@@ -123,7 +128,10 @@ public:
         return Disconnect(*boost::polymorphic_downcast<InputSlot*>(&slot));
     }
 
-    
+    // Layer& GetOwningLayer() const { return m_OwningLayer; }
+     unsigned int CalculateIndexOnOwner() const override;
+    LayerGuid GetOwningLayerGuid() const override;
+    bool operator==(const OutputSlot& other) const;
 
 private:
     void ValidateConnectionIndex(unsigned int index) const;
@@ -196,12 +204,11 @@ public:
 
     void SetGuid(LayerGuid guid) { m_Guid = guid; }
     LayerGuid GetGuid() const final { return m_Guid; }
-
-    void AddRelatedLayerName(const std::string layerName) { m_RelatedLayerNames.emplace_back(layerName); }
-
-    const std::list<std::string>& GetRelatedLayerNames() { return m_RelatedLayerNames; }
-
-
+// protected:
+//     using ConstantTensors = std::vector<std::reference_wrapper<std::unique_ptr<ConstTensor>>>;
+//     virtual ConstantTensors GetConstantTensorsByRef() {return ConstantTensors(); };
+protected:
+    std::vector<TensorInfo> m_TensorInfo;
 private:
     const std::string m_LayerName;
 

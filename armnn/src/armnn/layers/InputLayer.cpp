@@ -4,10 +4,9 @@
 //
 #include "InputLayer.hpp"
 
-#include "LayerCloneBase.hpp"
+#include "InternalTypes.hpp"
 
-#include <backendsCommon/WorkloadData.hpp>
-#include <backendsCommon/WorkloadFactory.hpp>
+
 
 namespace armnn
 {

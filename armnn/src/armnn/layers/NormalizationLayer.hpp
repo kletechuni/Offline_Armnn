@@ -14,7 +14,7 @@ class NormalizationLayer : public LayerWithParameters<NormalizationDescriptor>
 {
 public:
 
-protected:
+
     /// Constructor to create a NormalizationLayer.
     /// @param [in] param NormalizationDescriptor to configure the normalization operation.
     /// @param [in] name Optional name for the layer.

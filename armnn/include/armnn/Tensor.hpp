@@ -168,7 +168,7 @@ public:
     {
         if (container.size() * sizeof(T) != info.GetNumBytes())
         {
-            throw InvalidArgumentException("Container size is not correct");
+            //throw InvalidArgumentException("Container size is not correct");
         }
     }
 };

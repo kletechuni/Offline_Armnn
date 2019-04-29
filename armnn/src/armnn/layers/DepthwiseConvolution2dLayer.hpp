@@ -21,7 +21,7 @@ public:
     ConstTensor m_Bias;
 
 
-protected:
+
     /// Constructor to create a DepthwiseConvolution2dLayer.
     /// @param [in] param DepthwiseConvolution2dDescriptor to configure the depthwise convolution2d.
     /// @param [in] name Optional name for the layer.

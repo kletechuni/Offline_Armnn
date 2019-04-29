@@ -14,7 +14,7 @@ class OutputLayer : public BindableLayer
 {
 public:
 
-protected:
+
     /// Constructor to create an OutputLayer.
     /// @param id The layer binding id number.
     /// @param name Optional name for the layer.

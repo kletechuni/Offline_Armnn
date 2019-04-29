@@ -4,11 +4,7 @@
 //
 #include "NormalizationLayer.hpp"
 
-#include "LayerCloneBase.hpp"
-
-#include <armnn/TypesUtils.hpp>
-#include <backendsCommon/WorkloadData.hpp>
-#include <backendsCommon/WorkloadFactory.hpp>
+#include "InternalTypes.hpp"
 
 namespace armnn
 {

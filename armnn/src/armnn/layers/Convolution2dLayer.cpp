@@ -3,9 +3,9 @@
 // SPDX-License-Identifier: MIT
 //
 #include "Convolution2dLayer.hpp"
+#include "InternalTypes.hpp"
 
 
-using namespace armnnUtils;
 
 namespace armnn
 {

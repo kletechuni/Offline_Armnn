@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: MIT
 //
 #include "FullyConnectedLayer.hpp"
-
-
+#include "Layer.hpp"
+#include "InternalTypes.hpp"
 namespace armnn
 {
 
@@ -13,5 +13,9 @@ FullyConnectedLayer::FullyConnectedLayer(const FullyConnectedDescriptor& param, 
 {
 }
 
+// ConstantTensors FullyConnectedLayer::GetConstantTensorsByRef()
+// {
+//     return {m_Weight,m_Bias};
+// }
 
 } // namespace armnn

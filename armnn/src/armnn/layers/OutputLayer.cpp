@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: MIT
 //
 #include "OutputLayer.hpp"
-
+#include "InternalTypes.hpp"
 
 namespace armnn
 {

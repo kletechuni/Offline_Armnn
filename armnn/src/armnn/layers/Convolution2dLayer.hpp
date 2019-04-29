@@ -5,7 +5,7 @@
 #pragma once
 
 #include "LayerWithParameters.hpp"
-
+#include "InternalTypes.hpp"
 namespace armnn
 {
 
@@ -21,7 +21,7 @@ public:
     ConstTensor m_Bias;
 
  
-protected:
+
     /// Constructor to create a Convolution2dLayer.
     /// @param [in] param Convolution2dDescriptor to configure the convolution2d operation.
     /// @param [in] name Optional name for the layer.

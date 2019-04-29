@@ -1,0 +1,3 @@
+/home/lenovo/Offline_Armnn/armnn/build/CMakeFiles/rebuild_cache.dir
+/home/lenovo/Offline_Armnn/armnn/build/CMakeFiles/armnn.dir
+/home/lenovo/Offline_Armnn/armnn/build/CMakeFiles/edit_cache.dir

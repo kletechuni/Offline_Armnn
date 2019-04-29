@@ -6,6 +6,7 @@
 
 #include <Layer.hpp>
 
+
 namespace armnn
 {
 
@@ -39,7 +40,7 @@ protected:
 
    
     /// The parameters for the layer (not including tensor-valued weights etc.).
-    Parameters m_Param;
+   Parameters m_Param;
 };
 
 } // namespace

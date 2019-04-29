@@ -4,8 +4,7 @@
 //
 #include "Pooling2dLayer.hpp"
 
-
-using namespace armnnUtils;
+#include "InternalTypes.hpp"
 
 namespace armnn
 {

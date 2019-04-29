@@ -1,0 +1,74 @@
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/lenovo/Offline_Armnn/armnn/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_1839a/fast"
+/usr/bin/make -f CMakeFiles/cmTC_1839a.dir/build.make CMakeFiles/cmTC_1839a.dir/build
+make[1]: Entering directory '/home/lenovo/Offline_Armnn/armnn/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_1839a.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -fPIE   -o CMakeFiles/cmTC_1839a.dir/CheckSymbolExists.c.o   -c /home/lenovo/Offline_Armnn/armnn/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_1839a
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1839a.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_1839a.dir/CheckSymbolExists.c.o  -o cmTC_1839a 
+CMakeFiles/cmTC_1839a.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0x1b): undefined reference to `pthread_create'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_1839a.dir/build.make:97: recipe for target 'cmTC_1839a' failed
+make[1]: *** [cmTC_1839a] Error 1
+make[1]: Leaving directory '/home/lenovo/Offline_Armnn/armnn/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_1839a/fast' failed
+make: *** [cmTC_1839a/fast] Error 2
+
+File /home/lenovo/Offline_Armnn/armnn/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/lenovo/Offline_Armnn/armnn/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_4ca37/fast"
+/usr/bin/make -f CMakeFiles/cmTC_4ca37.dir/build.make CMakeFiles/cmTC_4ca37.dir/build
+make[1]: Entering directory '/home/lenovo/Offline_Armnn/armnn/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_4ca37.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -fPIE   -o CMakeFiles/cmTC_4ca37.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.10/Modules/CheckFunctionExists.c
+Linking C executable cmTC_4ca37
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4ca37.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_4ca37.dir/CheckFunctionExists.c.o  -o cmTC_4ca37 -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_4ca37.dir/build.make:97: recipe for target 'cmTC_4ca37' failed
+make[1]: *** [cmTC_4ca37] Error 1
+make[1]: Leaving directory '/home/lenovo/Offline_Armnn/armnn/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_4ca37/fast' failed
+make: *** [cmTC_4ca37/fast] Error 2
+
+
+Determining if the include file valgrind/memcheck.h exists failed with the following output:
+Change Dir: /home/lenovo/Offline_Armnn/armnn/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_509c4/fast"
+/usr/bin/make -f CMakeFiles/cmTC_509c4.dir/build.make CMakeFiles/cmTC_509c4.dir/build
+make[1]: Entering directory '/home/lenovo/Offline_Armnn/armnn/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_509c4.dir/CheckIncludeFile.c.o
+/usr/bin/cc   -fPIE   -o CMakeFiles/cmTC_509c4.dir/CheckIncludeFile.c.o   -c /home/lenovo/Offline_Armnn/armnn/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+/home/lenovo/Offline_Armnn/armnn/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c:1:10: fatal error: valgrind/memcheck.h: No such file or directory
+ #include <valgrind/memcheck.h>
+          ^~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+CMakeFiles/cmTC_509c4.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_509c4.dir/CheckIncludeFile.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_509c4.dir/CheckIncludeFile.c.o] Error 1
+make[1]: Leaving directory '/home/lenovo/Offline_Armnn/armnn/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_509c4/fast' failed
+make: *** [cmTC_509c4/fast] Error 2
+
+

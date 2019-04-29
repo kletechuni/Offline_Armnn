@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: MIT
 //
 #include "ActivationLayer.hpp"
-
+#include "InternalTypes.hpp"
 
 
 

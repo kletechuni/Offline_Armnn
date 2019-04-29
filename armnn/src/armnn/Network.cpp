@@ -6,8 +6,7 @@
 #include "Network.hpp"
 //#include "Graph.hpp"
 #include "Layer.hpp"
-
-
+#include"LayerFwd.hpp"
 #include <fcntl.h>
 #include <algorithm>
 #include <fstream>
@@ -48,7 +47,6 @@ void INetwork::Destroy(INetwork* network)
 
 
 Network::Network()
-: m_Graph(std::make_unique<Graph>())
 {
 }
 
@@ -59,9 +57,10 @@ Network::~Network()
 IConnectableLayer* Network::AddInputLayer(LayerBindingId id, const char* name)
 {
     //return m_Graph->AddLayer<InputLayer>(id, name);
-    Layer l=new InputLayer(id,name);
+    InputLayer*  const l= new InputLayer(id,name);
     m_Graph.push_back(l);
-    return l;
+    
+    return m_Graph[m_Graph.size()-1];
 }
 
 
@@ -76,7 +75,7 @@ IConnectableLayer* Network::AddFullyConnectedLayerImpl(const FullyConnectedDescr
     }
 
     //const auto layer = m_Graph->AddLayer<FullyConnectedLayer>(fullyConnectedDescriptor, name);
-    Layer layer=new FullyConnectedLayer(fullyConnectedDescriptor,name);
+   FullyConnectedLayer* layer=new FullyConnectedLayer(fullyConnectedDescriptor,name);
     layer->m_Weight = weights;
 
     if (fullyConnectedDescriptor.m_BiasEnabled)
@@ -84,7 +83,7 @@ IConnectableLayer* Network::AddFullyConnectedLayerImpl(const FullyConnectedDescr
         layer->m_Bias = *biases;
     }
     m_Graph.push_back(layer);
-    return layer;
+    return m_Graph[m_Graph.size()-1];
 } 
 
 IConnectableLayer* Network::AddFullyConnectedLayer(const FullyConnectedDescriptor& fullyConnectedDescriptor,
@@ -113,15 +112,15 @@ IConnectableLayer* Network::AddConvolution2dLayerImpl(const Convolution2dDescrip
     }
 
     //const auto layer = m_Graph->AddLayer<Convolution2dLayer>(convolution2dDescriptor, name);
-    Layer layer = new Convolution2dLayer(convolution2dDescriptor,name);
+    Convolution2dLayer* layer = new Convolution2dLayer(convolution2dDescriptor,name);
     layer->m_Weight = weights;
 
     if (convolution2dDescriptor.m_BiasEnabled)
     {
         layer->m_Bias = *biases;
     }
-    layer.push_back(layer);
-    return layer;
+    m_Graph.push_back(layer);
+    return m_Graph[m_Graph.size()-1];
 }
 
 IConnectableLayer* Network::AddConvolution2dLayer(const Convolution2dDescriptor& convolution2dDescriptor,
@@ -150,7 +149,7 @@ IConnectableLayer* Network::AddDepthwiseConvolution2dLayerImpl(
     }
 
     //const auto layer = m_Graph->AddLayer<DepthwiseConvolution2dLayer>(convolution2dDescriptor, name);
-    Layer layer = new DepthwiseConvolution2dLayer(convolution2dDescriptor,name);
+    DepthwiseConvolution2dLayer* layer = new DepthwiseConvolution2dLayer(convolution2dDescriptor,name);
     layer->m_Weight = weights;
 
     if (convolution2dDescriptor.m_BiasEnabled)
@@ -159,7 +158,7 @@ IConnectableLayer* Network::AddDepthwiseConvolution2dLayerImpl(
     }
     m_Graph.push_back(layer);
 
-    return layer;
+    return m_Graph[m_Graph.size()-1];
 }
 
 IConnectableLayer* Network::AddDepthwiseConvolution2dLayer(
@@ -183,38 +182,49 @@ IConnectableLayer* Network::AddPooling2dLayer(const Pooling2dDescriptor& pooling
     const char* name)
 {
    // return m_Graph->AddLayer<Pooling2dLayer>(pooling2dDescriptor, name);
-   Layer layer = new Pooling2dLayer(pooling2dDescriptor,name);
-   return layer;
+   Pooling2dLayer* layer = new Pooling2dLayer(pooling2dDescriptor,name);
+   m_Graph.push_back(layer);
+   return m_Graph[m_Graph.size()-1];
 }
 
 IConnectableLayer* Network::AddActivationLayer(const ActivationDescriptor& activationDescriptor,
     const char* name)
 {
     //return m_Graph->AddLayer<ActivationLayer>(activationDescriptor, name);
-    Layer layer=new ActivationLayer(activationDescriptor,name);
+    ActivationLayer* layer=new ActivationLayer(activationDescriptor,name);
     m_Graph.push_back(layer);
+     return m_Graph[m_Graph.size()-1];
 }
 
 IConnectableLayer* Network::AddNormalizationLayer(const NormalizationDescriptor&
 normalizationDescriptor,
     const char* name)
 {
-    return m_Graph->AddLayer<NormalizationLayer>(normalizationDescriptor, name);
+   NormalizationLayer* layer = new NormalizationLayer(normalizationDescriptor,name);
+    m_Graph.push_back(layer);
+    return m_Graph[m_Graph.size()-1];
+}
+
+
+IConnectableLayer* Network::AddOutputLayer(LayerBindingId id, const char* name)
+{
+    OutputLayer* layer =new OutputLayer(id,name);
+    m_Graph.push_back(layer);
+     return m_Graph[m_Graph.size()-1];
 }
 
 IConnectableLayer* Network::AddSoftmaxLayer(const SoftmaxDescriptor& softmaxDescriptor,
     const char* name)
 {
-    return m_Graph->AddLayer<SoftmaxLayer>(softmaxDescriptor, name);
+    // return m_Graph->AddLayer<SoftmaxLayer>(softmaxDescriptor, name);
+    SoftmaxLayer* layer=new SoftmaxLayer(softmaxDescriptor,name);
+    m_Graph.push_back(layer);
+     return m_Graph[m_Graph.size()-1];
 }
 
 
 
 
-IConnectableLayer* Network::AddOutputLayer(LayerBindingId id, const char* name)
-{
-    return m_Graph->AddLayer<OutputLayer>(id, name);
-}
 
 
 // void Network::Accept(ILayerVisitor& visitor) const
@@ -225,13 +235,13 @@ IConnectableLayer* Network::AddOutputLayer(LayerBindingId id, const char* name)
 //     };
 // }
 
-OptimizedNetwork::OptimizedNetwork(std::unique_ptr<Graph> graph)
-    : m_Graph(std::move(graph))
-{
-}
+// OptimizedNetwork::OptimizedNetwork(std::unique_ptr<Graph> graph)
+//     : m_Graph(std::move(graph))
+// {
+// }
 
-OptimizedNetwork::~OptimizedNetwork()
-{
-}
+// OptimizedNetwork::~OptimizedNetwork()
+// {
+//}
 
 } // namespace armnn

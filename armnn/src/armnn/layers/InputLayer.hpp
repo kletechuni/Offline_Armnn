@@ -14,7 +14,7 @@ class InputLayer : public BindableLayer
 {
 public:
   
-protected:
+//protected:
     /// Constructor to create an InputLayer.
     /// @param id The layer binding id number.
     /// @param name Optional name for the layer.

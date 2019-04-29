@@ -15,7 +15,7 @@ public:
   
 
 
-protected:
+
     /// Constructor to create an ActivationLayer.
     /// @param [in] param ActivationDescriptor to configure the activation operation.
     /// @param [in] name Optional name for the layer.

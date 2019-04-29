@@ -14,7 +14,7 @@ class SoftmaxLayer : public LayerWithParameters<SoftmaxDescriptor>
 {
 public:
   
-protected:
+
     /// Constructor to create a SoftmaxLayer.
     /// @param [in] param SoftmaxDescriptor to configure the softmax operation.
     /// @param [in] name Optional name for the layer.

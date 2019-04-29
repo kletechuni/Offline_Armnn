@@ -11,6 +11,7 @@
 
 #include "Tensor.hpp"
 #include "Types.hpp"
+#include "Exceptions.hpp"
 
 namespace armnn
 {

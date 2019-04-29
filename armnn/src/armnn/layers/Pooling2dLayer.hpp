@@ -15,7 +15,7 @@ class Pooling2dLayer : public LayerWithParameters<Pooling2dDescriptor>
 public:
 
 
-protected:
+
     /// Constructor to create a Pooling2dLayer.
     /// @param [in] param Pooling2dDescriptor to configure the pooling2d operation.
     /// @param [in] name Optional name for the layer.
